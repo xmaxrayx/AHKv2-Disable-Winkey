@@ -6,9 +6,13 @@
 
 InstallKeybdHook(1,1)
 
-defaultWinBindKey:= "{F1}"
-timeWait := 0.5
 
+global EnableDebug := 1
+
+
+global defaultWinBindKey:= "{F1}"
+global timeWait := 0.5
+global nonVisibleKeyList := ["Enter" , "Left" , "Right" , "UP" , "Down", "Backspace" , "Shift" ]
 
 
 
@@ -42,13 +46,26 @@ LWin::{
                 return
 
             default:
-                MsgBox "you pressed " winKeyCombo
-                MsgBox isWinKeyDown_status__string()
+
                 
                 local EndKey__Clean := afterWinKey.EndKey
+                global nonVisibleKeyList 
+                loop nonVisibleKeyList.Length{
+                    EndKey__Clean := RegExReplace(EndKey__Clean, "i)" . nonVisibleKeyList[A_Index]  , ('{' . nonVisibleKeyList[A_Index] . '}')) 
+                }
 
-                EndKey__Clean := RegExReplace(EndKey__Clean, "i)enter" ,"{Enter}")
-                EndKey__Clean := RegExReplace(EndKey__Clean, "i)left" ,"{}")
+                if EnableDebug == 1 {
+
+                    MsgBox( "you pressed " winKeyCombo
+                    "`n" 'is win pressed ' isWinKeyDown_status__string() '`n Realtime winkey down :'  GetKeyState("LWin" ,"P")
+                    "`nEnd__clean value :" EndKey__Clean
+                    )
+                    return
+
+                }
+                
+                ; EndKey__Clean := RegExReplace(EndKey__Clean, "i)enter" ,"{Enter}")
+                ; EndKey__Clean := RegExReplace(EndKey__Clean, "i)left" ,"{}")
                 ;to see if there something wrong with your combo shortcut
                 SendInput(EndKey__Clean) ; need "" to convert non-visable key like enter
                 return
@@ -75,82 +92,3 @@ LWin::{
 
 
 }
-
-; Browser_Forward::{    
-; MsgBox KeyWaitAny("V")
-; }
-
-; KeyWaitAny(Options:="")    
-; {   
-;     ih := InputHook(Options)
-;     if !InStr(Options, "V")
-;         ih.VisibleNonText := false
-;     ih.KeyOpt("{All}", "E")
-;     ih.KeyOpt("{All}", "N")  
-    
-;     while winKeyHock.OnKeyDown == 0{
-;     }
-;        KeyWait("Lwin" , "L")
-
-;     }
-;     ih.Start()
-;     ih.Wait()
-
- 
-;     ; return ih.EndKey  ; Return the key name
-
-;     MsgBox
-; } 
-
-
-
-
-; Browser_Favorites::{
-
-     
-;     varabileMangerv2(typeName?){
-
-;         masterHock := InputHook()
-    
-;         masterLoop:= 1
-;             while masterLoop ==1 {
-;                 masterHock.KeyOpt("{All}", "E")  
-;                 ; masterHock.KeyOpt("{LCtrl}{RCtrl}{LAlt}{RAlt}{LShift}{RShift}{LWin}{RWin}", "-E")
-;                 masterHock.Start()
-;                 masterHock.Wait()
-;                 MsgBox  masterHock.EndKey
-;                 switch masterHock.EndKey {
-;                     case "Space":
-;                         MsgBox
-;                         SendInput "{Right 3}"
-;                         masterLoop := 0
-;                     case "Right"  :
-    
-;                     case "Left":
-    
-;                     case "Up":
-    
-;                     case "Down":
-    
-    
-;                     default:
-;                         ; ;MsgBox ('{' masterHock.EndMods . masterHock.EndKey '}')
-;                         ; ;m := EndmodsTranslator(masterHock.EndMods, masterHock.EndKey)
-;                         ; SendInput(EndmodsTranslator(masterHock.EndMods, masterHock.EndKey))
-;                         ; ;SendInput(m)
-;                         ; ;SendInput('{' masterHock.EndMods . masterHock.EndKey '}')
-                    
-                
-;                 }
-            
-;         }
-    
-;     }
-
-
-
-
-
-
-; }
-
