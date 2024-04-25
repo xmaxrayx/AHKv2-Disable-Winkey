@@ -1,20 +1,10 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
-
-; moved to another project 
-
-
-
-
-
 ; v1 [Laptop HQ] @xMaxrayx @Unbreakable-ray [Code : ReBorn]   at 12:35:16  on 24/4/2024   (24H Format)  (UTC +2) 	 {Can we prove we are stronger than before?}
+; v1.5 [Laptop HQ] @xMaxrayx @Unbreakable-ray [Code : ReBorn]   at 10:20:40  on 25/4/2024   (24H Format)  (UTC +2) 	 {Can we prove we are stronger than before?}
+
 
 InstallKeybdHook(1,1)
-
-
-
-
-
 
 defaultWinBindKey:= "{F1}"
 timeWait := 0.5
@@ -86,15 +76,6 @@ LWin::{
 
 }
 
-
-f::{
-Sleep(1000)
-if GetKeyState("Shift")
-    MsgBox "At least one Shift key is down." GetKeyState("Shift")
-else
-    MsgBox "Neither Shift key is down."  GetKeyState("Shift")
-
-}
 ; Browser_Forward::{    
 ; MsgBox KeyWaitAny("V")
 ; }
