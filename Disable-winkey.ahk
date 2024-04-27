@@ -13,7 +13,7 @@ global defaultWinBindKey:= "{F1}"
 global timeWait := 0.5
 global nonVisibleKeyList := ["Enter" , "Left" , "Right" , "UP" , "Down", "Backspace" , "Shift" ]
 global longTimePress := "{blind}{LWin}"
-global winHoldDownTime := 5
+global winHoldDownTime := 8 
 
 
 WinActivate("Untitled - Notepad")
@@ -90,12 +90,29 @@ LWin::{
                     SendInput(defaultWinBindKey)
                     exit
                 }
-                
-                return
+            case "i":
+                SendInput "{Lwin Down}i{LWin UP}"
+                exit
+
+            case "v":
+                SendInput "{Lwin Down}v{LWin UP}"
+                exit  
+            
+            case "x":
+                SendInput("{LWin Down}x{LWin up}")
+                exit
+            case "w": 
+                Run("C:\Program Files\Microsoft Office\root\Office16\ONENOTE.EXE")               
+                ;return
+            case "``":
+                ;Win-Alt-N
+                SendInput("{LWin Down}{Alt Down}n{ALt UP}{LWin UP}")
             case "Space":
 
+                
+                
+                
                 msgdebug("is win key is down"  GetKeyState("LWin" ,"P"))
-              
                 msgdebug("you pressed space key !!! ^^")
 
                 exit
