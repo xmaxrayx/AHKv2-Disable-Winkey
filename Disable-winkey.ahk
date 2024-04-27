@@ -102,7 +102,7 @@ LWin::{
 
             default:
 
-                
+                msgdebug("this A_ahk: " A_ThisHotkey)
                 local EndKey__Clean := afterWinKey.EndKey
                 global nonVisibleKeyList 
                 loop nonVisibleKeyList.Length{
